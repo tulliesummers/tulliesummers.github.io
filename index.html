@@ -3,19 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Author Chaos Gremlin</title>
+  <title>Author Tullie Summers</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <nav class="navbar">
+    <ul class="nav-left">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="coming-soon.html">Coming Soon</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="cart.html" class="cart-btn" aria-label="View Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7.16 16h9.68c.8 0 1.51-.48 1.8-1.21l3.24-7.56A1 1 0 0 0 21 6H6.21l-.94-2.36A1 1 0 0 0 4.34 2H1a1 1 0 1 0 0 2h2.34l3.6 9.03-1.35 2.44A2 2 0 0 0 7.16 16zm12.24-8-2.88 6.72a1 1 0 0 1-.92.58H7.16l1.1-2h7.72a1 1 0 1 0 0-2H8.53l-.76-2H19.4z"/></svg>
+      </a>
+    </div>
+  </nav>
   <div id="vanta-bg">
-    <div class="content">
-      <h1>Welcome to My Author Lair</h1>
-      <p>Books. Chaos. Broken hearts. Happy endings.</p>
+    <div class="content home-columns one-col">
+      <div class="right-col">
+        <div class="review-carousel" id="review-carousel">
+          <div class="review-slide active">
+            <div class="review-stars">★★★★★</div>
+            <blockquote>
+              This book was such a great read. The author did an amazing job capturing the emotions of people in relationships, especially toxic ones. I read this book in just a few days. Definitely going to read more of Tullies books.
+            </blockquote>
+            <div class="review-attribution">— Amy</div>
+          </div>
+          <div class="review-slide">
+            <div class="review-stars">★★★★★</div>
+            <blockquote>
+              Tullie Summers does an amazing job at capturing the range of emotions that come from a toxic relationship as well as the struggle with addiction. The plot kept me hooked the entire time and the fact that her writing is so eloquent is just icing on the cake. A must read!
+            </blockquote>
+            <div class="review-attribution">— Leanne</div>
+          </div>
+          <div class="review-slide">
+            <div class="review-stars">★★★★★</div>
+            <blockquote>
+              If I could I would rate this a 7 star rating however as we know that is not an option, but well written and done! The author really captured the real experience of a toxic relationship even though it is a difficult topic. She did a fantastic job on the characters,setting,and plot. It is well thought out and executed story. I could completely relate to this having experienced it first hand with my brother and sister in law. I felt like I was reading how their relationship was. If I was able to I would dedicate this book to my brother. RIP little brother! You will always be remembered. Thank you for sharing this story to open people’s eyes to the reality of addiction and a toxic relationship. Well deserved 5 star Tullie Summer!
+            </blockquote>
+            <div class="review-attribution">— Roma</div>
+          </div>
+          <button class="carousel-btn prev" aria-label="Previous Review">&#8592;</button>
+          <button class="carousel-btn next" aria-label="Next Review">&#8594;</button>
+        </div>
+        <div class="portrait-below">
+          <img src="PP.jpg" alt="Tullie Summers Portrait" class="author-portrait" />
+        </div>
+        <h1>Author Tullie Summers</h1>
+        <div class="tagline">Happy Endings Never Guaranteed</div>
+        <h2>About Tullie Summers</h2>
+        <p>Steeped in raw emotion, complex character dynamics and the haunting weight of trauma, healing and redemption, Tullie Summers brings to life the tidal wave contemporary romances can experience. With a passion for hard-won hope and stories of resilience, she writes for readers who want their hearts smashed and pieced back together. Happily married to her high school sweetheart, Tullie Summer’s life has been akin to many of the romance novels we all long for with just enough tragedy and struggle to keep the pages turning.  She loves spending her days painting, baking and enjoying picnics, usually with a book in hand. She spins stories of love, loss and never guarantees a happy ending.</p>
+      </div>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+  <script>
+    var setVanta = () => {
+      if (window.VANTA) window.VANTA.FOG({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        highlightColor: 0xb400ff,
+        midtoneColor: 0xe000ff,
+        baseColor: 0x46067a
+      })
+    }
+    if (window._strk && typeof window._strk.push === 'function') {
+      window._strk.push(function() {
+        setVanta()
+        if (window.edit_page && window.edit_page.Event && typeof window.edit_page.Event.subscribe === 'function') {
+          window.edit_page.Event.subscribe("Page.beforeNewOneFadeIn", setVanta)
+        }
+      })
+    } else {
+      setVanta();
+    }
+
+    // Review Carousel JS
+    const slides = document.querySelectorAll('.review-slide');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    let currentSlide = 0;
+    let autoCycleInterval = null;
+    function showSlide(idx) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === idx);
+      });
+    }
+    function goToPrev() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+      resetAutoCycle();
+    }
+    function goToNext() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+      resetAutoCycle();
+    }
+    if (prevBtn && nextBtn && slides.length > 0) {
+      prevBtn.addEventListener('click', goToPrev);
+      nextBtn.addEventListener('click', goToNext);
+    }
+    // Optionally, enable keyboard navigation
+    document.getElementById('review-carousel').addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') prevBtn.click();
+      if (e.key === 'ArrowRight') nextBtn.click();
+    });
+    // Auto-cycle carousel every 6 seconds
+    function startAutoCycle() {
+      autoCycleInterval = setInterval(() => {
+        goToNext();
+      }, 6000);
+    }
+    function resetAutoCycle() {
+      if (autoCycleInterval) clearInterval(autoCycleInterval);
+      startAutoCycle();
+    }
+    showSlide(currentSlide);
+    startAutoCycle();
+  </script>
 </body>
 </html>
